@@ -1,0 +1,25 @@
+---
+- name: Configure Linux servers
+  hosts: linux_servers
+  become: yes
+
+  tasks:
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+
+    - name: Enable nginx on boot
+      service:
+        name: nginx
+        enabled: yes
